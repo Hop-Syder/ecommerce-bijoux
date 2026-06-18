@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sika Bijoux — Application Web Cliente
 
-## Getting Started
+> **Composant** : Frontend (Next.js Application)  
+> **Organisation** : Nexus Partners  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📌 Présentation
+
+Cette application est l'interface utilisateur de la boutique de vente de bijoux haut de gamme Sika Bijoux. Conçue avec **Next.js (App Router)** et configurée en TypeScript, elle offre une expérience d'achat fluide et un tableau de bord complet pour les administrateurs.
+
+## 🛠️ Stack Technique et Bibliothèques
+
+- **Framework** : Next.js 16 (App Router)
+- **Styling** : Tailwind CSS v4 (nouvelle architecture optimisée, pas de fichier `tailwind.config.js` classique)
+- **Gestion d'État** : Zustand (utilisé pour gérer le panier d'achat, les filtres produits et la synchronisation de l'état client)
+- **Authentification** : NextAuth.js v5 (Beta) avec stratégie JWT, intégrée de façon transparente avec le backend API
+
+---
+
+## 📂 Structure des Fichiers
+
+```text
+apps/web/
+├── public/           # Assets statiques (logos, icônes)
+├── src/
+│   ├── app/          # Pages et architecture App Router
+│   │   ├── (public)/ # Pages de la boutique (vitrine, produits, panier, etc.)
+│   │   ├── (admin)/  # Dashboard d'administration (commandes, bijoux, rapports)
+│   │   ├── login/    # Page de connexion
+│   │   ├── api/      # Routes API Next.js internes (auth handlers)
+│   │   ├── globals.css
+│   │   └── layout.tsx
+│   ├── components/   # Composants UI partagés et réutilisables
+│   ├── hooks/        # React Hooks personnalisés
+│   ├── store/        # Stores Zustand (ex: panier.ts)
+│   ├── lib/          # Configurations tierces (ex: fetch clients)
+│   ├── types/        # Déclarations de types TypeScript
+│   └── auth.ts       # Configuration d'authentification NextAuth.js v5
+├── package.json
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚦 Intégration et API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+L'application communique directement avec l'API REST Express (`apps/api`) via l'URL spécifiée par la variable d'environnement `NEXT_PUBLIC_API_URL`.
 
-## Learn More
+L'authentification est gérée via [NextAuth.js v5](file:///home/hopsyder/Projet/ecommerce-bijoux/apps/web/src/auth.ts) qui sécurise :
+- Les pages d'administration sous le groupe de routes `(admin)`
+- Les requêtes sortantes vers l'API d'administration en y injectant le token JWT de session.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Commandes de Développement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Toutes les commandes listées ci-dessous doivent être exécutées depuis le dossier `apps/web` ou via l'option `-w apps/web` depuis la racine du monorepo.
 
-## Deploy on Vercel
+### Serveur de développement
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Lancer le serveur de développement Next.js (sur http://localhost:3000)
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Production et Qualité
+
+```bash
+# Lancer le build de production (génère les pages statiques et optimisées)
+npm run build
+
+# Démarrer le serveur Next.js compilé pour la production
+npm run start
+
+# Exécuter ESLint pour analyser la qualité et le style du code
+npm run lint
+```
