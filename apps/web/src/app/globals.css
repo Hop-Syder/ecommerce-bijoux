@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-or: #c9a227;
+  --color-noir: #0e0e0e;
+  --color-ivoire: #fbf8f2;
+  --color-anthracite: #2c2c2c;
+  --color-whatsapp: #25d366;
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.input {
+  width: 100%;
+  border-radius: 0.125rem;
+  border: 1px solid color-mix(in srgb, var(--color-noir) 15%, transparent);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-or);
+}
